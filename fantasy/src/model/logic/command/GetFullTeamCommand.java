@@ -22,8 +22,8 @@ public class GetFullTeamCommand implements Command {
         } catch (SQLException ex){
             //log4j
         }
-        String name = "lopka";
-        request.setAttribute("Team",name);
+
+        request.setAttribute("Team",players);
 
         return "view/resultFull";
     }
