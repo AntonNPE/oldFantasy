@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>FullTeam</title>
+    <title>JSP Page</title>
 </head>
 <body>
 <h1>Input data:</h1>
@@ -15,7 +15,7 @@
     <table>
 
         <tr>
-            <td colspan="2"><input type="submit" value="ShowMeFullTeam!!!"/></td>
+            <td><input type="submit" value="ShowMeFullTeam!!!"/></td>
         </tr>
     </table>
 </form>

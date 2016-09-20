@@ -1,6 +1,4 @@
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +6,7 @@
     <title>JSP Page</title>
 </head>
 <body>
-<h1>In Java: <%= request.getParameter("Team") %> </h1>
+<h1>Choose page:</h1>
+<a href="fullTeam.jsp"/>Full Team<br>
 </body>
 </html>
