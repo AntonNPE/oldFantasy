@@ -8,6 +8,6 @@
     <title>JSP Page</title>
 </head>
 <body>
-<h1>In Java: <%= request.getAttribute("result")%></h1>
+<h1>In Java: <%= request.getParameter("result") %> </h1>
 </body>
 </html>

@@ -1,8 +1,8 @@
 package web.model.logic;
 
 
-import web.model.logic.command.Command;
-import web.model.logic.command.GetFullTeamCommand;
+import web.model.logic.command.*;
+
 
 public class SimpleFabric {
 

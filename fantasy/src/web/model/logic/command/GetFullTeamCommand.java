@@ -6,25 +6,21 @@ import web.model.logic.FullTeamService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.Collection;
+
 
 public class GetFullTeamCommand implements Command {
 
-    private List <Player> players = null;
 
-    public String execute(HttpServletRequest request, HttpServletResponse response)  {
 
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         FullTeamService fullTeamService = new FullTeamService();
 
-        /*try {
-             players = fullTeamService.getTeam();
-        } catch (SQLException ex){
-            //log4j
-        }
-*/
-        String name = "Ignat";
-        request.setAttribute("Team",name);
+        Collection<Player> result = fullTeamService.getTeam();
 
-        return "view/resultFull";
+        request.setAttribute("result",result);
+
+        return "view/resultFull.jsp";
     }
 }

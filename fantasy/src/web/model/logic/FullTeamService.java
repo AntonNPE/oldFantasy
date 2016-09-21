@@ -8,11 +8,13 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class FullTeamService {
 
-    public List<Player> getTeam() throws SQLException {
+
+    public Collection<Player> getTeam() throws SQLException {
         List<Player> playersList = new ArrayList<>();
         CallableStatement stmt = null;
         ResultSet rs = null;
@@ -44,5 +46,9 @@ public class FullTeamService {
         }
         return playersList;
     }
+
+
+
+
 
 }

@@ -12,15 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Servlet extends HttpServlet {
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Command command = SimpleFabric.createCommand(request.getParameter("cmd"));
+        try {
+            Command command = SimpleFabric.createCommand(request.getParameter("cmd"));
 
-        String page = command.execute(request, response);
+            String page = command.execute(request, response);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+            dispatcher.forward(request, response);
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
 
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
