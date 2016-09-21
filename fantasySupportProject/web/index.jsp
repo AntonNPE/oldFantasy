@@ -62,6 +62,7 @@
         <th><a href="mul.jsp"/>mul</th>
         <th><a href="div.jsp"/>div</th>
         <th><a href="rest.jsp"/>rest</th>
+        <th><a href="anotherMul.jsp"/>anotherMul</th>
         <th><a href="fullTeam.jsp"/>FullTeam</th>
     </tr>
 </table>

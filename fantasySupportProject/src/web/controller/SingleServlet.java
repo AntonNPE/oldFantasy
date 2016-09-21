@@ -17,11 +17,14 @@ public class SingleServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Command command = SimpleFabric.createCommand(request.getParameter("cmd"));
+        try {
+            String page = command.execute(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+            dispatcher.forward(request, response);
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
 
-        String page = command.execute(request, response);
-                
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
 
     }
 

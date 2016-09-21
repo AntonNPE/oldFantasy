@@ -22,6 +22,8 @@ public class SimpleFabric {
                 return new NewCommand();
             case "fullTeam":
                 return new GetFullTeamCommand();
+            case "anotherMul":
+                return new AnotherMultiplicationCommand();
             default:
                 return new EmptyCommand();
         }
