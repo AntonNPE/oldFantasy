@@ -47,10 +47,7 @@ public class FullTeamService {
         return playersList;
     }
 
-//    public String getTeam(){
-//        String team = "Team";
-//        return team;
-//    }
+
 
 
 

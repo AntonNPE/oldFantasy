@@ -22,7 +22,7 @@
         font-weight: bold;
     }
     th {
-        padding: 40px 80px;
+        padding: 55px 80px;
         color: #3D3511;
         border-bottom: 1px solid #F4EEE8;
         border-top-left-radius: 10px;
@@ -58,6 +58,9 @@
     <tr>
 
         <th><a href="fullTeam.jsp"/>FullTeam</th>
+        <th><a href="TeamCreate.jsp"/>TeamCreate</th>
+        <th><a href="fullTeam.jsp"/>TeamView</th>
+        <th><a href="fullTeam.jsp"/>PlayerView</th>
     </tr>
 </table>
 

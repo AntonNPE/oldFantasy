@@ -19,8 +19,8 @@ public class GetFullTeamCommand implements Command{
             FullTeamService fullTeamService = new FullTeamService();
 
 
-            Collection<Player> myresult = fullTeamService.getTeam();
-//            String myresult = "codding just";
+            Collection <Player> myresult = fullTeamService.getTeam();
+
             request.setAttribute("myresult", myresult);
 
             return "view/resultFull.jsp";
