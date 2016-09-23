@@ -19,6 +19,7 @@ public class Servlet extends HttpServlet {
 
         try {
             Command command = SimpleFabric.createCommand(request.getParameter("cmd"));
+
             String page = command.execute(request, response);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher(page);

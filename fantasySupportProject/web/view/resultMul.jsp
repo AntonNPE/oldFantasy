@@ -11,3 +11,6 @@
         <h1>In Java: <%= request.getParameter("a") + " * " + request.getParameter("b") + " = " + request.getAttribute("result")%></h1>
     </body>
 </html>
+
+
+

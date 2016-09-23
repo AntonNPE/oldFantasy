@@ -4,16 +4,17 @@
     <title>Displaying team name</title>
 </head>
 <body>
-<form action="Servlet" method="post">
 <h1> Your team is : <%= request.getAttribute("teamName") %>
 </h1>
+<form action="Servlet" method="post">
 
-    <p><select size="3" multiple name="teamChoice">
+    <p><select  name="clubs">
         <option disabled>Choice the team</option>
         <option value="United">United</option>
         <option value="City">City</option>
         <option value="Chelsea">Chelsea</option>
         <option value="Arsenal">Arsenal</option>
+        <option value="CustomTeam"><%= request.getAttribute("teamName")%></option>
     </select></p>
 
     <input type="hidden" name="cmd" value="fullTeamCreate"/>

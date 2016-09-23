@@ -14,10 +14,10 @@ public class FullTeamCreateCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-
-        String team = request.getParameter("clubs");
-
-        request.setAttribute("type",team);
+        String name = request.getParameter("teamName");
+        String team = request.getParameter("teamChoice");
+        request.setAttribute("name",name);
+        request.setAttribute("teamChoice",team);
 
         return "view/teamCreate/FullTeamPage";
     }
