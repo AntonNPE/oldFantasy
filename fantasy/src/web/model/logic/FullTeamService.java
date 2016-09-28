@@ -2,20 +2,36 @@ package web.model.logic;
 
 
 import web.model.entity.Player;
+import web.model.util.CustomIterator;
 import web.model.util.ManagementSystem;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
-public class FullTeamService {
+public class FullTeamService implements Iterable {
+    private static List<Player> playersList;
 
 
-    public Collection<Player> getTeam() throws SQLException {
-        List<Player> playersList = new ArrayList<>();
+    public static List<Player> getPlayersList() {
+        return playersList;
+    }
+
+    public static void setPlayersList(List<Player> playersList) {
+        FullTeamService.playersList = playersList;
+    }
+
+    @Override
+    public Iterator<Player> iterator() {
+        return new CustomIterator(playersList);
+    }
+
+    public List<Player> getTeam() throws SQLException {
+
+        playersList = new ArrayList<>();
         CallableStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -46,9 +62,6 @@ public class FullTeamService {
         }
         return playersList;
     }
-
-
-
 
 
 }

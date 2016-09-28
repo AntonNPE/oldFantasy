@@ -1,14 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Displaying team name</title>
-</head>
-<body>
-<h1> Your team is : <%= request.getAttribute("teamName") %>
-</h1>
-<form action="view/teamCreate/FullTeamPage.jsp" method="post">
 
-    <table>
+
+<h1> Your team is : <%= request.getAttribute("teamName") %></h1>
+
+
+<form action=view/teamCreate/FullTeamPage.jsp method="post">
+
+    <%--<input type="hidden" name="cmd" value="fullTeamCreate"/>--%>
+    <p><input type="submit" value="Enter"></p>
+</form>
+
+
+<table>
         <tr>
             <th>Club Type Sort</th>
             <th>Position Type Sort</th>
@@ -48,9 +50,17 @@
         </tr>
     </table>
 
-    <input type="hidden" name="cmd" value="fullTeamCreate"/>
-    <input type="hidden" name="name" value="<%= request.getAttribute("teamName") %>"/>
-    <p><input type="submit" value="Enter"></p>
-</form>
-</body>
-</html>
+
+<c:forEach items="${team}" var="playerr">
+    <h2>
+        <c:out value="${playerr.getId()}"/>
+        <c:out value="${playerr.getName()}"/>
+        <c:out value="${playerr.getAge()}"/>
+        <c:out value="${playerr.getnationality()}"/>
+        <c:out value="${playerr.getClub()}"/>
+        <c:out value="${playerr.getPosition()}"/>
+        <c:out value="${playerr.getPrice()}"/>
+
+    </h2>
+</c:forEach>
+

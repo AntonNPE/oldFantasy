@@ -1,6 +1,5 @@
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,13 @@
     <title>JSP Page</title>
 </head>
 <body>
-<h1>In Java: <%= request.getAttribute("result")%></h1>
+<c:forEach var="row" items="${collection}" varStatus="rowCounter">
+    <tr>
+        <td><c:out value="${rowCounter.count}"/></td>
+        <td><c:out value="${row.id}"/></td>
+        <td><c:out value="${row.name}"/></td>
+        <td><c:out value="${row.description}"/></td>
+    </tr>
+</c:forEach>
 </body>
 </html>

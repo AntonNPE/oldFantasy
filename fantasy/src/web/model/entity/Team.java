@@ -1,16 +1,30 @@
 package web.model.entity;
 
+import web.model.util.CustomIterator;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Team {
-    private List<Player> team = null;
+public class Team implements Iterable <Player> {
+
+
+    private List<Player> team;
     private int cost;
     private int TEAM_BUDGET = 100;
     private int goalkeepersCount;
     private int defendersCount;
     private int midfieldersCount;
     private int forwardsCount;
+
+    public Team() {
+        this.team = new ArrayList<>();
+    }
+
+    @Override
+    public Iterator<Player> iterator() {
+        return new CustomIterator(team);
+    }
 
     public void addGoalkeepersCount() {
         this.goalkeepersCount++;
@@ -45,11 +59,11 @@ public class Team {
         return forwardsCount;
     }
 
-    public int getTEAM_BUDGET (){
+    public int getTEAM_BUDGET() {
         return TEAM_BUDGET;
     }
 
-    public int transferMoney (){
+    public int transferMoney() {
 
         return TEAM_BUDGET - cost;
     }
@@ -60,15 +74,14 @@ public class Team {
 
     }
 
+    public List<Player> getAllTeam() {
+        return team;
+    }
+
     public int getCost() {
         return cost;
     }
 
-
-
-    public Team() {
-        team = new ArrayList<>();
-    }
 
     public Player getPlayer(int i) {
         return team.get(i);
@@ -79,6 +92,7 @@ public class Team {
         team.add(player);
 
     }
+
 
     public int getTeamSize() {
         return team.size();

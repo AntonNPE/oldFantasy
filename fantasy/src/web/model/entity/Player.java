@@ -83,5 +83,15 @@ public class Player  {
         this.price = price;
     }
 
-
+    @Override
+    public String toString() {
+        return  "\nid=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", nationality='" + nationality + '\'' +
+                ", club='" + club + '\'' +
+                ", position='" + position + '\'' +
+                ", price=" + price
+                ;
+    }
 }

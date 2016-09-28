@@ -22,7 +22,7 @@ public class Servlet extends HttpServlet {
             String page = command.execute(request, response);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-            dispatcher.forward(request, response);
+             dispatcher.forward(request, response);
         }catch (Exception ex){
             System.out.println(ex);
         }
