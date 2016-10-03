@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="service" class="web.model.logic.FullTeamService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,19 +8,19 @@
     <title>JSP Page</title>
 </head>
 <body>
-<h1>My team is : <%= request.getParameter("name")%></h1>
-
+<h1>My team is : <%= request.getParameter("teamName")%></h1>
+<c:set var="allteam" value="${service.allPlayers}" />
 <table>
     <tr>
-        <th>Club Type Sort</th>
-        <th>Position Type Sort</th>
-        <th>Price Type Sort</th>
-        <th>Show all players</th>
+        <th>Club Sort</th>
+        <th>Position </th>
+        <th>Price </th>
+        <th>Show </th>
     </tr>
     <tr>
         <td>
-            <select name="clubsSort">
-                <option disabled>Choice the team</option>
+            <select name="Sort">
+                <option selected disabled><%=request.getParameter("clubSort")%></option>
                 <option value="united">United</option>
                 <option value="city">City</option>
                 <option value="chelsea">Chelsea</option>
@@ -28,7 +30,7 @@
         </td>
         <td>
             <select name="positionSort">
-                <option disabled>Choice the position</option>
+                <option selected disabled><%=request.getParameter("positionSort")%></option>
                 <option value="goalkeeper">goalkeeper</option>
                 <option value="defender">defender</option>
                 <option value="midfielder">midfielder</option>
@@ -37,7 +39,7 @@
         </td>
         <td>
             <select name="priceSort">
-                <option disabled>Player's price below that :</option>
+                <option selected disabled><%=request.getParameter("priceSort")%></option>
                 <option value="6">6</option>
                 <option value="7">7</option>
                 <option value="8">8</option>
@@ -46,6 +48,20 @@
         </td>
         <td>Show all players</td>
     </tr>
+</table>
+
+<table>
+    <c:forEach items="${allteam}" var="player">
+        <tr>
+            <td><c:out value="${player.id}"/></td>
+            <td><c:out value="${player.name}"/></td>
+            <td><c:out value="${player.age}"/></td>
+            <td><c:out value="${player.nationality}"/></td>
+            <td><c:out value="${player.club}"/></td>
+            <td><c:out value="${player.position}"/></td>
+            <td><c:out value="${player.price}"/></td>
+        </tr>
+    </c:forEach>
 </table>
 
 </body>

@@ -64,3 +64,21 @@
     </h2>
 </c:forEach>
 
+
+
+обработка кнопки
+<form action="Servlet" method="post">
+			<input type="hidden" name="cmd" value="addCommand"/>
+            <input type="hidden" name="playersId" value="${player.id}"/>
+
+			</form>
+
+
+
+
+			AddPlayerCommand
+			  String clubSort = request.getParameter("clubSort");
+                    String positionSort = request.getParameter("positionSort");
+                    String priceSort = request.getParameter("priceSort");
+                    FullTeamService fullTeamService = new FullTeamService();
+                    request.setAttribute("sortedTeam", fullTeamService.getSortedTeam(clubSort, positionSort, priceSort));

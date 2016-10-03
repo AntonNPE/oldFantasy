@@ -17,6 +17,7 @@ public class Team implements Iterable <Player> {
     private int midfieldersCount;
     private int forwardsCount;
 
+
     public Team() {
         this.team = new ArrayList<>();
     }

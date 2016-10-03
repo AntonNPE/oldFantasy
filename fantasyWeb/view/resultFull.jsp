@@ -12,21 +12,19 @@
     <title>JSP Page</title>
 </head>
 <body>
-<c:set var="players" scope="session">
-    ${players}
-</c:set>
-<c:set var="player" scope="session">
-    ${player}
-</c:set>
-
-<c:set var="allteam" value="${service.team}" />
-
-<c:forEach var="unit" begin="0" end="2">
-    <h5>
-        <c:out value="${unit}"/> =  <c:out value="${allteam[unit]}"/>
-    </h5>
-
+<c:set var="allteam" value="${service.allPlayers}" />
+<table>
+<c:forEach items="${allteam}" var="player">
+    <tr>
+        <td><c:out value="${player.id}"/></td>
+        <td><c:out value="${player.name}"/></td>
+        <td><c:out value="${player.age}"/></td>
+        <td><c:out value="${player.nationality}"/></td>
+        <td><c:out value="${player.club}"/></td>
+        <td><c:out value="${player.position}"/></td>
+        <td><c:out value="${player.price}"/></td>
+    </tr>
 </c:forEach>
-
+</table>
 </body>
 </html>

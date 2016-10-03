@@ -7,6 +7,7 @@ import web.model.logic.FullTeamService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Set;
 
 
 public class GetFullTeamCommand implements Command {
@@ -18,10 +19,8 @@ public class GetFullTeamCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Team players = new Team();
         FullTeamService fullTeamService = new FullTeamService();
-        fullTeamService.getTeam();
-        for (Object p : fullTeamService){
-            players.addPlayer((Player)p);
-        }
+        Set<Player> set = fullTeamService.getAllPlayers();
+        set.forEach(players::addPlayer);
         Player player = new Player();
         request.setAttribute("player",player);
         request.setAttribute("players",players);

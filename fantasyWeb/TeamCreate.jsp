@@ -22,7 +22,7 @@
             <td colspan="2"><input type="submit" value="Enter"/></td>
         </tr>
     </table>
-    <input type="hidden" name="cmd" value="teamName"/>
+    <input type="hidden" name="cmd" value="teamCreate"/>
 </form>
 </body>
 </html>

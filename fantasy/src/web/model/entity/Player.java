@@ -17,6 +17,35 @@ public class Player  {
     public Player() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Player)) return false;
+
+        Player player = (Player) o;
+
+        if (id != player.id) return false;
+        if (age != player.age) return false;
+        if (price != player.price) return false;
+        if (!name.equals(player.name)) return false;
+        if (nationality != null ? !nationality.equals(player.nationality) : player.nationality != null) return false;
+        if (club != null ? !club.equals(player.club) : player.club != null) return false;
+        return position != null ? position.equals(player.position) : player.position == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + age;
+        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
+        result = 31 * result + (club != null ? club.hashCode() : 0);
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + price;
+        return result;
+    }
+
     public Player(ResultSet rs) throws SQLException {
         setId(rs.getInt(1));
         setName(rs.getString(2));
