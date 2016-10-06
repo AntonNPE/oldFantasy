@@ -19,17 +19,17 @@ public class AddPlayerCommand implements Command {
         FullTeamService fullTeamService = new FullTeamService();
         request.setAttribute("sortedTeam", fullTeamService.getSortedTeam(clubSort, positionSort, priceSort));
 
-
-        int id = Integer.parseInt(request.getParameter("playersId"));
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int playerId = Integer.parseInt(request.getParameter("playersId"));
         String teamName = request.getParameter("teamName");
         FullTeamService fullTeamService1 = new FullTeamService();
-        Set<Player> set = fullTeamService1.getPlayersByTeamName(teamName);
-        Player player = fullTeamService1.getPlayerById(id);
+        Set<Player> set = fullTeamService1.getPlayersByTeamName(teamName,userId);
+        Player player = fullTeamService1.getPlayerById(playerId);
         if (!set.contains(player)) {
             set.add(player);
-            fullTeamService1.setPlayerInTeam(teamName, id);
+            fullTeamService1.setPlayerInTeam(teamName, playerId,userId);
         }
         request.setAttribute("playersByName", set);
-        return "newJsp.jsp";
+        return "TeamCreateDisplay.jsp";
     }
 }

@@ -19,7 +19,6 @@ public class ManagementSystem {
         } catch (ClassNotFoundException ex) {
             //log4j
         }
-
     }
 
 

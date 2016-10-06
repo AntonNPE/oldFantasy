@@ -16,6 +16,5 @@
     </table>
     <input type="hidden" name="cmd" value="fullTeam"/>
 </form>
-
 </body>
 </html>

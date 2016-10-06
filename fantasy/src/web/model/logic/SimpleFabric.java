@@ -13,16 +13,16 @@ public class SimpleFabric {
 
             case "fullTeam":
                 return new GetFullTeamCommand();
-            case "teamCreate":
-                return new TeamCreateCommand();
-            case "fullTeamCreate":
-                return new FullTeamCreateCommand();
             case "tempCommand":
                 return new TempCommand();
             case "addCommand":
                 return new AddPlayerCommand();
             case "subCommand":
                 return new SubCommand();
+            case "logCommand":
+                return new LogCommand();
+            case "regCommand":
+                return new RegCommand();
             default:
                 return new GetFullTeamCommand();
         }

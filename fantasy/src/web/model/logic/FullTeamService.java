@@ -2,20 +2,24 @@ package web.model.logic;
 
 
 import web.model.entity.Player;
+import web.model.entity.User;
 import web.model.util.ManagementSystem;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public class FullTeamService {
 
     private Set<Player> playerSet;
     private CallableStatement stmt;
     private ResultSet rs;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
 
     public FullTeamService() {
         playerSet = new LinkedHashSet<>();
@@ -83,12 +87,13 @@ public class FullTeamService {
         return playerSet;
     }
 
-    private boolean isTeamExist(String teamName) {
+    private boolean isTeamExist(String teamName, int userId) {
         Set<String> teamSet = new HashSet<>();
         ResultSet rs;
         CallableStatement stmt;
         try {
-            stmt = ManagementSystem.getCn().prepareCall("{call getTeamList()}");
+            stmt = ManagementSystem.getCn().prepareCall("{call getTeamList(?)}");
+            stmt.setInt(1, userId);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 teamSet.add(rs.getString(2));
@@ -96,21 +101,23 @@ public class FullTeamService {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-
-        return teamSet.contains(teamName);
+        String t = teamName + userId;
+        return teamSet.contains(t);
     }
 
-    public Set<Player> getPlayersByTeamName(String teamName) {
+    public Set<Player> getPlayersByTeamName(String teamName, int userId) {
         try {
-            if (isTeamExist(teamName)) {
+            if (isTeamExist(teamName, userId)) {
 
-                stmt = ManagementSystem.getCn().prepareCall("{call getPlayersFromTeam(?)}");
+                stmt = ManagementSystem.getCn().prepareCall("{call getPlayersFromTeam(?,?)}");
                 stmt.setString(1, teamName);
+                stmt.setInt(2, userId);
                 rs = stmt.executeQuery();
                 playerSet = fillPlayersList(rs);
             } else {
-                stmt = ManagementSystem.getCn().prepareCall("{call createNewTable(?)}");
+                stmt = ManagementSystem.getCn().prepareCall("{call createNewTable(?,?)}");
                 stmt.setString(1, teamName);
+                stmt.setInt(2,userId);
                 rs = stmt.executeQuery();
             }
         } catch (SQLException ex) {
@@ -138,35 +145,81 @@ public class FullTeamService {
         return player;
     }
 
-    public void setPlayerInTeam(String teamName, int playerId) throws SQLException {
+    public void setPlayerInTeam(String teamName, int playerId, int userId) throws SQLException {
 
-
-        stmt = ManagementSystem.getCn().prepareCall("{call setPlayerInTeam(?,?)}");
+        String t = teamName + userId;
+        stmt = ManagementSystem.getCn().prepareCall("{call setPlayerInTeam(?,?,?)}");
         stmt.setString(1, teamName);
         stmt.setInt(2, playerId);
+        stmt.setInt(3,userId);
         stmt.executeUpdate();
     }
 
-    public void removePlayerById (String teamName, int playerId) throws SQLException {
-
-        stmt = ManagementSystem.getCn().prepareCall("{call subPlayerFromTeam(?,?)}");
+    public void removePlayerById(String teamName, int playerId, int userId) throws SQLException {
+        String t = teamName + userId;
+        stmt = ManagementSystem.getCn().prepareCall("{call subPlayerFromTeam(?,?,?)}");
         stmt.setString(1, teamName);
         stmt.setInt(2, playerId);
+        stmt.setInt(3,userId);
         stmt.executeUpdate();
     }
+
+    public Set<User> fillTheUserSet(ResultSet rs) throws SQLException {
+
+        Set<User> userSet = new LinkedHashSet<>();
+
+        while (rs.next()) {
+            User user = new User();
+            user.setId(rs.getInt(1));
+            user.setLogin(rs.getString(2));
+            user.setPassword(rs.getString(3));
+            userSet.add(user);
+        }
+        return userSet;
+    }
+
+    public boolean isUserExist(String login, String password) throws SQLException{
+        boolean correctUser = false;
+        Set <User> users;
+        stmt = ManagementSystem.getCn().prepareCall("{call getUserTable()}");
+        rs = stmt.executeQuery();
+        users = fillTheUserSet(rs);
+        for (User us : users){
+             if(us.getLogin().equals(login) & us.getPassword().equals(password)) {
+                 correctUser = true;
+                 user = us;
+             }
+        }
+        return correctUser;
+
+
+
+    }
+
+    public void createNewAccount (String regLogin,String regPassword) throws SQLException{
+
+        stmt = ManagementSystem.getCn().prepareCall("{call createNewUser(?,?)}");
+        stmt.setString(1, regLogin);
+        stmt.setString(2, regPassword);
+        stmt.executeUpdate();
+    }
+
 
 
 //    public static void main(String[] args) throws Exception {
 //
+//
+//        FullTeamService fullTeamService = new FullTeamService();
+//        Set <User> users;
 //        CallableStatement stmt;
 //        ResultSet rs;
-//        FullTeamService fullTeamService1 = new FullTeamService();
-//        stmt = ManagementSystem.getCn().prepareCall("{call getPlayersFromTeam(?)}");
-//        stmt.setString(1, "common");
-//        rs = stmt.executeQuery();
-//        Set <Player> set = fullTeamService1.fillPlayersList(rs);
-//        set.forEach(System.out::println);
+//        User user;
 //
+//
+//        if (fullTeamService.isUserExist("admin","admin")) {
+//
+//            System.out.println(fullTeamService.getUser().getId());
+//        }
 //
 //    }
 }

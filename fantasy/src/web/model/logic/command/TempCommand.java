@@ -15,16 +15,16 @@ public class TempCommand implements Command {
         String clubSort = request.getParameter("clubSort");
         String positionSort = request.getParameter("positionSort");
         String priceSort = request.getParameter("priceSort");
-
+        int userId = Integer.parseInt(request.getParameter("userId"));
 
         FullTeamService fullTeamService3 = new FullTeamService();
         Set <Player> set = fullTeamService3.getSortedTeam(clubSort,positionSort,priceSort);
         request.setAttribute("sortedTeam",set);
 
         FullTeamService fullTeamService1 = new FullTeamService();
-        Set <Player> anotherSet = fullTeamService1.getPlayersByTeamName(request.getParameter("teamName"));
+        Set <Player> anotherSet = fullTeamService1.getPlayersByTeamName(request.getParameter("teamName"),userId);
         request.setAttribute("playersByName",anotherSet);
-        return "newJsp.jsp";
+        return "TeamCreateDisplay.jsp";
 
 
 

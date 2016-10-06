@@ -19,15 +19,15 @@ public class SubCommand implements Command {
         FullTeamService fullTeamService = new FullTeamService();
         request.setAttribute("sortedTeam", fullTeamService.getSortedTeam(clubSort, positionSort, priceSort));
 
-
+        int userId = Integer.parseInt(request.getParameter("userId"));
         int id = Integer.parseInt(request.getParameter("playersId"));
         String teamName = request.getParameter("teamName");
         FullTeamService fullTeamService1 = new FullTeamService();
-        Set<Player> set = fullTeamService1.getPlayersByTeamName(teamName);
+        Set<Player> set = fullTeamService1.getPlayersByTeamName(teamName,userId);
         Player player = fullTeamService1.getPlayerById(id);
         set.remove(player);
-        fullTeamService.removePlayerById(teamName,id);
+        fullTeamService.removePlayerById(teamName,id,userId);
         request.setAttribute("playersByName", set);
-        return "newJsp.jsp";
+        return "TeamCreateDisplay.jsp";
     }
 }
